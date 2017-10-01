@@ -1,0 +1,89 @@
+require 'lib/racional.rb' 
+require 'rspec'
+
+describe Fraccion do
+  
+	before :each do
+		@n1 = Fraccion.new(4,8)
+		@n2 = Fraccion.new(1,2)	
+		@n3 = Fraccion.new(-1,-2)
+		@n4 = Fraccion.new(3,4)
+	end
+
+	it "Debe existir un numerador" do
+		@n1.num.should == 1
+	end
+
+        it "Debe existir un denominador" do
+		@n1.den.should == 2	
+	end
+        it "Debe de estar en su forma reducida" do
+		@n1.num.should == 1
+		@n1.den.should == 2
+	end
+	it "Se debe invocar al metodo num() para obtener el numerador" do
+		@n1.respond_to?("num").should be_true
+	end
+      	it "Se debe invocar al metodo dem() para obtener el numerador" do
+		@n1.respond_to?("den").should be_true
+	end
+	it "Se debe mostar por la consola la fraccion de la forma: a/b, 
+		donde a es el numerador y b el denominador" do
+		@n1.to_s.should == "1/2"
+	end
+	it "Se debe mostar por la consola la fraccion en formato flotante" do
+		@n1.to_f.should == 0.5
+	end
+	it "Se debe comparar si dos fracciones son iguales con ==" do
+		@n1.should == @n2
+	end
+	it "Se debe calcular el valor absoluto de una fraccion con el metodo abs" do
+		@n3.num.abs.should == 1
+		@n3.den.abs.should == 2
+	end
+	it "Se debe calcular el reciproco de una fraccion con el metodo reciprocal" do 
+		@n2.reciproco.to_s.should == "2/1" 
+	end
+	it "Se debe calcular el opuesto de una fraccion con -@(para no confundir con la resta) " do
+		@n2.-@.to_s.should == "-1/2"
+	end
+	it "Se debe sumar dos fracciones con + y dar el resultado de forma reducida" do
+		(@n1 + @n2).to_s == "2/2"
+	end
+	it "Se debe restar dos fracciones con - y dar el resultado de forma reducida" do
+		(@n4 - @n1).to_s == 1/4
+	end
+	it "Se debe multiplicar dos fracciones con * y dar el resultado de forma reducida" do
+		(@n4 * @n1).to_s == "3/8"
+	end
+	it "Se debe dividir dos fracciones con / y dar el resultado de forma reducida" do
+		(@n4 / @n1).to_s == "3/2"
+	end
+	it "Se debe calcular el resto dos fracciones con % y dar el resultado de forma reducida" do
+		@n4 % @n1 == 6
+	end
+	it "Se debe de poder comprobar si una fracion es menor que otra" do
+		(@n1 < @n4).should be_true
+		(@n4 < @n1).should be_false
+	end
+	it "Se debe de poder comprobar si una fracion es mayor que otra" do
+		(@n1 > @n4).should be_false
+		(@n4 > @n1).should be_true
+	end
+		it "Se debe de poder comprobar si una fracion es menor o igual que otra" do
+		(@n1 <= @n4).should be_true
+		(@n4 <= @n1).should be_false
+	end
+	it "Se debe de poder comprobar si una fracion es mayor o igual que otra" do
+		(@n1 >= @n4).should be_false
+		(@n4 >= @n1).should be_true	
+	end
+	
+	it "Calcular reciproco de una division" do
+		(@n2 /@n4).reciproco.to_s.should == "3/2"
+	end
+	
+end
+
+
+
